@@ -1,15 +1,16 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import Header from './containers/Header';
+import ContactsContainer from './containers/ContactsContainer';
+import ContactDetailsContainer from './containers/ContactDetailsContainer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
-    </div>
+    <React.Fragment>
+      <Header />
+      <Route exact path="/" component={ContactsContainer} />
+      <Route path="/contact/:id" component={ContactDetailsContainer} />
+    </React.Fragment>
   );
 }
 

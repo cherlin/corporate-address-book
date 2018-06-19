@@ -3,9 +3,14 @@ import { shallow } from 'enzyme';
 import App from './App';
 
 describe('App', () => {
-  it('renders "Welcome to React"', () => {
+  it('includes Header', () => {
     const wrapper = shallow(<App />);
-    const text = wrapper.find('.App-title').text();
-    expect(text).toEqual('Welcome to React');
+    expect(wrapper.find('Header')).toBeTruthy();
+  });
+
+  it('has Routes', () => {
+    const wrapper = shallow(<App />);
+    const routes = wrapper.find('Route');
+    expect(routes.length).toEqual(2);
   });
 });
