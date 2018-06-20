@@ -5,7 +5,8 @@ This is an address book built in React using the [randomuser.me](https://randomu
 ## How to use it
 1. Clone the repo: ```git clone https://github.com/cherlin/corporate-address-book```
 2. Change directory: ```cd corporate-address-book```
-3. Start the development server: ```npm start```
+3. Install dependencies: ```npm install```
+4. Start the development server: ```npm start```
 
 ## Things I used building it
 * [React](https://reactjs.org)
