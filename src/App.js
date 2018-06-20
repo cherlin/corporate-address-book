@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from './containers/Header';
+import Header from './components/Header';
 import ContactsPage from './containers/ContactsPage';
 import ContactDetailsPage from './containers/ContactDetailsPage';
 import { fetchContacts } from './actions';
@@ -15,7 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header title="The Corporate Address Book" />
         <Route exact path="/" component={ContactsPage} />
         <Route path="/contact/:id" component={ContactDetailsPage} />
       </React.Fragment>
@@ -31,4 +31,4 @@ App.propTypes = {
   fetchContacts: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(App);
+export default withRouter(connect(null, mapDispatchToProps)(App));
