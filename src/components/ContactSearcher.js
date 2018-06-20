@@ -23,7 +23,7 @@ function Searcher({ onSearch, value }) {
   return (
     <SearcherWrapper>
       <Label for="search">Search</Label>
-      <Input type="text" onChange={onSearch} value={value} name="search" id="search" />
+      <Input type="search" onChange={onSearch} value={value} name="search" id="search" />
     </SearcherWrapper>
   );
 }

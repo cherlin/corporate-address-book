@@ -98,6 +98,16 @@ const StyledLink = styled.a`
   color: inherit;
 `;
 
+const BackButton = styled.button`
+  width: 100%;
+  padding: 10px 8px;
+  color: white;
+  background: #0077B5;
+  font-size: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+`;
+
 export const details = (fetching, currentContact) => {
   if (fetching) return (<p>Loading!</p>);
   if (!currentContact.length) return (<p>No contact with that id!</p>);
@@ -139,12 +149,13 @@ export const details = (fetching, currentContact) => {
   );
 };
 
-function ContactDetailsPage({ contact, fetchingContacts }) {
+function ContactDetailsPage({ contact, fetchingContacts, history }) {
   return (
     <ContactDetailsPageWrapper>
       <Card>
         { details(fetchingContacts, contact) }
       </Card>
+      <BackButton onClick={history.goBack}>&#8592; Go Back</BackButton>
     </ContactDetailsPageWrapper>
   );
 }
@@ -158,6 +169,7 @@ const mapStateToProps = (state, ownProps) => ({
 ContactDetailsPage.propTypes = {
   contact: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   fetchingContacts: PropTypes.bool.isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default connect(mapStateToProps)(ContactDetailsPage);

@@ -40,15 +40,19 @@ function ContactsPage({
 
   return (
     <ContactPageWrapper>
-      { contacts.length ? (
+      { (contacts.length || searchInput) ? ( // If contacts or current search
         <React.Fragment>
           <SearchSortWrapper>
             <ContactSearcher onSearch={handleSearch} value={searchInput} />
             <ContactSorter onSort={handleSort} value={sortedBy} />
           </SearchSortWrapper>
-          <ContactLister contacts={contacts} sortedBy={sortedBy} />
+          { contacts.length ? ( // Is there any contacts?
+            <ContactLister contacts={contacts} sortedBy={sortedBy} />
+          ) : ( // Nope, tell the user.
+            <div>No results found for that search!</div>
+          ) }
         </React.Fragment>
-      ) : (
+      ) : ( // If no contacts and no current search, they are being fetched.
         <div>Loading...</div>
       ) }
     </ContactPageWrapper>
