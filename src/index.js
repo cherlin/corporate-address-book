@@ -7,6 +7,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers';
 import { api } from './middleware/api';
+import baseStyles from './styles/index';
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
@@ -18,13 +19,17 @@ const store = createStore(
 );
 /* eslint-enable no-underscore-dangle */
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root'),
-);
+const render = () => {
+  baseStyles();
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>,
+    document.getElementById('root'),
+  );
+};
 
+render();
 registerServiceWorker();

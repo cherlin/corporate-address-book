@@ -1,10 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ContactSorter from '../components/ContactSorter';
 import ContactSearcher from '../components/ContactSearcher';
 import ContactLister from '../components/ContactLister';
 import { filterContacts, sortContacts } from '../actions';
+
+const ContactPageWrapper = styled.div`
+  max-width: 800px;
+  margin: 30px auto;
+  @media (max-width: 768px) {
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+`;
+
+const SearchSortWrapper = styled.form`
+  display: flex;
+  margin-bottom: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+`;
 
 function ContactsPage({
   contacts, // 'contacts' from state
@@ -22,18 +39,19 @@ function ContactsPage({
   };
 
   return (
-    <div>
-      <h1>Contacts Page</h1>
+    <ContactPageWrapper>
       { contacts.length ? (
         <React.Fragment>
-          <ContactSorter onSort={handleSort} value={sortedBy} />
-          <ContactSearcher onSearch={handleSearch} value={searchInput} />
+          <SearchSortWrapper>
+            <ContactSearcher onSearch={handleSearch} value={searchInput} />
+            <ContactSorter onSort={handleSort} value={sortedBy} />
+          </SearchSortWrapper>
           <ContactLister contacts={contacts} sortedBy={sortedBy} />
         </React.Fragment>
       ) : (
         <div>Loading...</div>
       ) }
-    </div>
+    </ContactPageWrapper>
   );
 }
 
