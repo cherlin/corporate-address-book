@@ -1,8 +1,5 @@
 const defaultState = {
   contacts: [],
-  sortedByFirstName: [],
-  sortedByLastName: [],
-  filteredContacts: [],
   searchInput: '',
   fetchingContacts: false,
   fetchingContactsFailed: '',
@@ -17,15 +14,24 @@ const contacts = (state = defaultState, action) => {
       return {
         ...state,
         fetchingContacts: false,
-        contacts: action.data.results,
-        // Initialize with all contacts before user search/filter.
-        filteredContacts: action.data.results,
+        // Sort by last name as a default.
+        contacts: action.data.results.sort((a, b) => (a.name.last > b.name.last ? 1 : -1)),
       };
     case 'FETCH_CONTACTS_FAILURE':
       return {
         ...state,
         fetchingContacts: false,
         fetchingContactsFailed: action.error,
+      };
+    case 'FILTER_CONTACTS':
+      return {
+        ...state,
+        searchInput: action.searchTerm,
+      };
+    case 'SORT_CONTACTS':
+      return {
+        ...state,
+        sortedBy: action.sort,
       };
     default:
       return state;
