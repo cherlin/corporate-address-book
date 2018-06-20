@@ -1,11 +1,17 @@
 # The Corporate Address Book
 
-This is an address book built in React using the randomuser.me API. It makes use of Create React App, for which the readme is below.
+This is an address book built in React using the [randomuser.me](https://randomuser.me) API. It makes use of Create React App, for which the readme is below.
 
-## How to use
+## How to use it
 1. Clone the repo: ```git clone https://github.com/cherlin/corporate-address-book```
 2. Change directory: ```cd corporate-address-book```
-3. Start the development server ```npm start```
+3. Start the development server: ```npm start```
+
+## Things I used building it
+* [React](https://reactjs.org)
+  * [React Router](https://reacttraining.com/react-router/)
+  * [Styled Components](https://www.styled-components.com)
+* [Redux](https://redux.js.org)
 
 ---
 
