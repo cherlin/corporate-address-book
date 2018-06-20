@@ -3,7 +3,7 @@
 This is an address book built in React using the randomuser.me API. It makes use of Create React App, for which the readme is below.
 
 ## How to use
-1. Clone the repo: ```git clone https://github.com/cherlin/corporate-address-book````
+1. Clone the repo: ```git clone https://github.com/cherlin/corporate-address-book```
 2. Change directory: ```cd corporate-address-book```
 3. Start the development server ```npm start```
 
