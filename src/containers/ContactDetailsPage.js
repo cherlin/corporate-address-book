@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { nameCapitalizer } from '../utils';
+import { nameCapitalizer, addressCapitalizer } from '../utils';
 
 const ContactDetailsPageWrapper = styled.div`
   max-width: 800px;
@@ -15,13 +15,13 @@ const ContactDetailsPageWrapper = styled.div`
 
 const Card = styled.div`
   display: flex;
+  flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 3px;
   margin: 10px 0;
   padding: 22px 25px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
   @media (max-width: 768px) {
-    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -38,6 +38,8 @@ const Segments = styled.div`
 
 const ProfilePicture = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Avatar = styled.img`
@@ -88,10 +90,12 @@ const AddressInfo = styled.div`
 const Label = styled.span`
   font-weight: 500;
   margin-right: 10px;
+  width: 70px;
 `;
 
 const InfoItem = styled.p`
   margin: 0 0 7px;
+  display: flex;
 `;
 
 const StyledLink = styled.a`
@@ -111,41 +115,47 @@ const BackButton = styled.button`
 export const details = (fetching, currentContact) => {
   if (fetching) return (<p>Loading!</p>);
   if (!currentContact.length) return (<p>No contact with that id!</p>);
+  const {
+    picture,
+    name,
+    email,
+    phone,
+    cell,
+    location,
+  } = currentContact[0];
   return (
-    currentContact.map(person => (
-      <Segments key={person.login.uuid}>
-        <ProfilePicture>
-          <Avatar src={person.picture.large} alt={person.name.first} />
-        </ProfilePicture>
-        <ProfileInfo>
-          <Title>{nameCapitalizer(person.name.first)} {nameCapitalizer(person.name.last)}</Title>
-          <PersonData>
-            <BasicInfo>
-              <InfoItem>
-                <Label>Email</Label> <StyledLink href={`mailto:${person.email}`}>{person.email}</StyledLink>
-              </InfoItem>
-              <InfoItem>
-                <Label>Phone</Label> {person.phone}
-              </InfoItem>
-              <InfoItem>
-                <Label>Cell</Label> {person.cell}
-              </InfoItem>
-            </BasicInfo>
-            <AddressInfo>
-              <InfoItem>
-                <Label>Street</Label> {person.location.street}
-              </InfoItem>
-              <InfoItem>
-                <Label>City</Label> {person.location.city}
-              </InfoItem>
-              <InfoItem>
-                <Label>State</Label> {person.location.postcode}
-              </InfoItem>
-            </AddressInfo>
-          </PersonData>
-        </ProfileInfo>
-      </Segments>
-    ))
+    <Segments>
+      <ProfilePicture>
+        <Avatar src={picture.large} alt={name.first} />
+      </ProfilePicture>
+      <ProfileInfo>
+        <Title>{nameCapitalizer(name.first)} {nameCapitalizer(name.last)}</Title>
+        <PersonData>
+          <BasicInfo>
+            <InfoItem>
+              <Label>Email</Label> <StyledLink href={`mailto:${email}`}>{email}</StyledLink>
+            </InfoItem>
+            <InfoItem>
+              <Label>Phone</Label> {phone}
+            </InfoItem>
+            <InfoItem>
+              <Label>Cell</Label> {cell}
+            </InfoItem>
+          </BasicInfo>
+          <AddressInfo>
+            <InfoItem>
+              <Label>Street</Label> {addressCapitalizer(location.street)}
+            </InfoItem>
+            <InfoItem>
+              <Label>City</Label> {addressCapitalizer(location.city)}
+            </InfoItem>
+            <InfoItem>
+              <Label>State</Label> {location.postcode}
+            </InfoItem>
+          </AddressInfo>
+        </PersonData>
+      </ProfileInfo>
+    </Segments>
   );
 };
 
